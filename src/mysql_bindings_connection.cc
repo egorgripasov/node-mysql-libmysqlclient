@@ -1575,13 +1575,11 @@ Handle<Value> MysqlConnection::SetSslSync(const Arguments& args) {
 
     MYSQLCONN_MUSTBE_INITIALIZED;
 
-    REQ_STR_ARG(0, key)
-    REQ_STR_ARG(1, cert)
-    REQ_STR_ARG(2, ca)
-    REQ_STR_ARG(3, capath)
-    REQ_STR_ARG(4, cipher)
+    REQ_STR_ARG(0, ca)
+    REQ_STR_ARG(1, capath)
+    REQ_STR_ARG(2, cipher)
 
-    mysql_ssl_set(conn->_conn, *key, *cert, *ca, *capath, *cipher);
+    mysql_ssl_set(conn->_conn, NULL, NULL, *ca, *capath, *cipher);
 
     return scope.Close(Undefined());
 }
